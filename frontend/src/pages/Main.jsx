@@ -24,7 +24,8 @@ function Main() {
       {isLoading && <div>Check Wallet</div>}
       {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
     </>
-  );*/
+  );
+  */
 }
 
 export default Main;
