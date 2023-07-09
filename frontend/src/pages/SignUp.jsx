@@ -49,13 +49,13 @@ const SignUp = () => {
           duration: 2000,
           isClosable: true,
         })
-        console.log(err)
+        console.log(err.message)
       });
   }
 
   return (
     <Container maxW="1200px" margin="auto" display="flex" justifyContent="center" >
-        <Box borderRadius="5px" w="40%" mt="3rem" background="#191925" p="2rem 1rem" shadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <Box borderRadius="5px" w="40%" minW="400px" mt="3rem" background="#191925" p="2rem 1rem" shadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
 
             <Heading as="h2" mb="2rem" color="#ffffff" fontSize="24px" textAlign="center">
               SIGN UP
