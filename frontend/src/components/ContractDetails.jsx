@@ -1,7 +1,3 @@
-
-
-
-
 import {
   Container,
   Box,
@@ -105,7 +101,6 @@ return (
         )) :
           <Text textAlign="center">No Applicants Found</Text>
         }
-      
       </Box>
     </Box>
   </Container>
