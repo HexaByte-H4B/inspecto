@@ -1,18 +1,18 @@
 import { useContract, useSigner } from "wagmi";
-import ensRegistryABI from "../abi/ensRegistryABI";
-const useVideoLibraryContract = () => {
+import ensRegistry from "../abi/ensRegistry.json"
+const useEscrowContract = () => {
     try {
         const { data: signer, isError, isLoading } = useSigner()
-        const videoLibraryContract = useContract({
+        const useEscrowContract = useContract({
             address: '0x5a8391233E8821621986614ce1C2bcaA1dd5BF3C',
-            abi: ensRegistryABI,
+            abi: ensRegistry,
             signerOrProvider: signer,
           })
-        return videoLibraryContract;  
+        return useEscrowContract;  
     }
     catch (error) {
         console.log(error);
         return
     }
 }
-export default useVideoLibraryContract;
+export default useEscrowContract;
