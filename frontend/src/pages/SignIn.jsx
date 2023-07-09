@@ -2,20 +2,25 @@ import React, { useState } from 'react'
 import { Box, Button, Container, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, db } from '../config';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
 
   const [emailId, setEmailId] = useState('')
   const [password, setPassword] = useState('')
 
+  const navigate = useNavigate()
+
   const login = async (e) => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, emailId, password)
       .then((userAuth) => {
           console.log(userAuth.user);
+          localStorage.setItem('email', userAuth.user.email)
+          navigate("/")
       })
       .catch((err) => {
-          alert(err);
+          console.log(err);
       });
   }
 
