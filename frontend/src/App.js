@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import {
@@ -12,7 +12,7 @@ import {
 } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import Main from './pages/Main';
+import Home from './pages/Home';
 import Navbar from "./components/Navbar"
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -44,8 +44,10 @@ export default function App() {
         <RainbowKitProvider coolMode chains={chains}>
           <Navbar />
           <Routes>
+            <Route exact path='/' element={<Home />} />
             <Route path='/sign-in' element={<SignIn />} />
             <Route path='/sign-up' element={<SignUp />} />
+            <Route path="*" element={<Navigate to="/"/>} />
           </Routes>
         </RainbowKitProvider>
       </WagmiConfig>

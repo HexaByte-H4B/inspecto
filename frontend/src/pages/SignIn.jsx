@@ -53,16 +53,6 @@ const SignIn = () => {
       });
   }
 
-  const apolloRunner = useQueryRunner()
-  const fetcher = async () => {
-    const res = await apolloRunner(GetAllEscrowQuery, {})
-    console.log(res)
-  }
-
-  useEffect(() => {
-    fetcher()
-  }, [])
-
   return (
     <Container maxW="1200px" margin="auto" display="flex" justifyContent="center" >
         <Box borderRadius="5px" w="40%" mt="3rem" background="#191925" p="2rem 1rem" shadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
