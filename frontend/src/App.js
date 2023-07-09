@@ -12,11 +12,11 @@ import {
 } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import Main from './pages/Main';
+import Contract from "./components/Contract/Contract"
 import Navbar from "./components/Navbar"
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import Card from "./components/Card/Card"
+
 
 const { chains, publicClient } = configureChains(
   [polygonMumbai, polygon],
@@ -44,7 +44,7 @@ export default function App() {
       <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider coolMode chains={chains}>
           <Navbar />
-          <Card/>
+          <Contract/>
           <Routes>
             <Route path='/sign-in' element={<SignIn />} />
             <Route path='/sign-up' element={<SignUp />} />
