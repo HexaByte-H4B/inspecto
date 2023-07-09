@@ -242,6 +242,10 @@ const NAV_ITEMS = [
     href: '/',
   },
   {
+    label: 'Create',
+    href: '/contract/create',
+  },
+  {
     label: 'Connections',
     href: '/connections',
   },
