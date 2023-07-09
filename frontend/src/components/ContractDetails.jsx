@@ -15,6 +15,7 @@ import {
   Button,
   Modal,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 
 function ContractDetails({
@@ -22,8 +23,10 @@ function ContractDetails({
   description,
   url,
   company,
-  appliedAuditors
+  appliedAuditors,
+  handleAssignAuditor
 }) {
+  const [selectedAuditor, setSelectedAuditor] = useState({})
   const TruncatedText = ({ text }) => {
     
     if (!text) return
@@ -33,10 +36,13 @@ function ContractDetails({
 
   };
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const ApprovalModal=()=>{
+  const ApprovalModal=({escrowId, applicationId})=>{
     return (
       <>
-        <Button size="sm" onClick={onOpen}>Approval</Button>
+        <Button size="sm" onClick={() => {
+          setSelectedAuditor({escrowId, applicationId})
+          onOpen()
+        }}>Approval</Button>
         <Modal
           isCentered
           onClose={onClose}
@@ -49,7 +55,15 @@ function ContractDetails({
             <ModalCloseButton />
             
             <ModalFooter>
-              <Button  colorScheme='blue' mr={3} onClick={onClose}>
+              <Button  colorScheme='blue' mr={3} onClick={async () => {
+                try {
+                  console.log(selectedAuditor)
+                  await handleAssignAuditor(selectedAuditor.escrowId, selectedAuditor.applicationId)
+                  onClose()
+                } catch(err) {
+                  console.log(err)
+                }
+              }}>
                 Accept
               </Button>
               <Button colorScheme='blue'>Cancel</Button>
@@ -96,7 +110,7 @@ return (
               <TruncatedText text={auditor.auditor}/>
             </Text>
             <Spacer/>
-            <ApprovalModal/>
+            <ApprovalModal escrowId={auditor.escrowId} applicationId={auditor.applicationId} />
           </Box>
         )) :
           <Text textAlign="center">No Applicants Found</Text>
