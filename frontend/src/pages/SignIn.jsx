@@ -1,21 +1,52 @@
 import React, { useState } from 'react'
-import { Box, Button, Container, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { Box, Button, Container, FormControl, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../config';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
 
   const [emailId, setEmailId] = useState('')
   const [password, setPassword] = useState('')
 
+  const navigate = useNavigate()
+  const toast = useToast()
+
   const login = async (e) => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, emailId, password)
       .then((userAuth) => {
           console.log(userAuth.user);
+          localStorage.setItem('email', userAuth.user.email)
+          navigate("/")
       })
       .catch((err) => {
-          alert(err);
+          if (err.message === "Firebase: Error (auth/wrong-password).") {
+            return toast({
+              title: 'Invalid Credentials',
+              description: "Wrong Password Entered!",
+              status: 'error',
+              duration: 2000,
+              isClosable: true,
+            })
+          }
+          if (err.message === "Firebase: Error (auth/user-not-found).") {
+            return toast({
+              title: 'Invalid Credentials',
+              description: "User Not Found!",
+              status: 'error',
+              duration: 2000,
+              isClosable: true,
+            })
+          }
+          toast({
+            title: 'Error occured.',
+            description: "Something Went Wrong.",
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+          })
+          console.log(err.message)
       });
   }
 

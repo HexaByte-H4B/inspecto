@@ -1,8 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-// raainbow + wagmi + providers
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultWallets,
@@ -16,6 +13,9 @@ import {
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import Main from './pages/Main';
+import Navbar from "./components/Navbar"
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 const { chains, publicClient } = configureChains(
   [polygonMumbai, polygon],
@@ -39,14 +39,16 @@ const wagmiConfig = createConfig({
 
 export default function App() {
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider coolMode chains={chains}>
-        {/* <Routes>
-          <Route path='/sign-in' element={<SignIn />} />
-          <Route path='/sign-up' element={<SignUp />} />
-        </Routes> */}
-        <Main />
-      </RainbowKitProvider>
-  </WagmiConfig>
+    <>
+      <WagmiConfig config={wagmiConfig}>
+        <RainbowKitProvider coolMode chains={chains}>
+          <Navbar />
+          <Routes>
+            <Route path='/sign-in' element={<SignIn />} />
+            <Route path='/sign-up' element={<SignUp />} />
+          </Routes>
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </>
   );
 };
