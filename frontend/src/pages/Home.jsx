@@ -24,6 +24,8 @@ function Home() {
     <>
       {allEscrows?.map((escrow) => (
         <Card
+          key={escrow.id}
+          id={escrow.escrowId}
           title={escrow.title}
           description={escrow.description}
           deposit={escrow.deposit}

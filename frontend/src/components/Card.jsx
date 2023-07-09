@@ -10,8 +10,10 @@ import {
   Button,
   Avatar
 } from "@chakra-ui/react";
+import { Link as ReactLink } from 'react-router-dom'
 
 const Card = ({
+  id,
   title,
   description,
   deposit,
@@ -39,7 +41,7 @@ const Card = ({
                   Reference: <Link href="/" >{url}</Link>
 
                   <Box display="flex" m="auto" justifyContent="center" width="80%">
-                      <Button width="100%" type="submit" mt="2rem" background="brand.yellow" variant="none" color="#222230">View Escrow</Button>
+                      <Button as={ReactLink} to={`/contract/${id}`} width="100%" type="submit" mt="2rem" background="brand.yellow" variant="none" color="#222230">View Escrow</Button>
                   </Box>
               </Box>
           </Box>
