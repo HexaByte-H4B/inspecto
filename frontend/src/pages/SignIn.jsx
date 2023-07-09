@@ -3,6 +3,9 @@ import { Box, Button, Container, FormControl, FormLabel, Heading, Input, useToas
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../config';
 import { useNavigate } from 'react-router-dom';
+import { useQueryRunner } from '../utils/useQueryRunner';
+import { GetAllEscrowQuery } from '../apollo/Queries';
+import { useEffect } from 'react';
 
 const SignIn = () => {
 
@@ -49,6 +52,16 @@ const SignIn = () => {
           console.log(err.message)
       });
   }
+
+  const apolloRunner = useQueryRunner()
+  const fetcher = async () => {
+    const res = await apolloRunner(GetAllEscrowQuery, {})
+    console.log(res)
+  }
+
+  useEffect(() => {
+    fetcher()
+  }, [])
 
   return (
     <Container maxW="1200px" margin="auto" display="flex" justifyContent="center" >
