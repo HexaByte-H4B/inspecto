@@ -51,7 +51,7 @@ export default function App() {
             <Route path='/contract-upload' element={<ContractUpload />} />
             <Route path='/connection/chat/:chatID' element={<ChatPage />}/>
           </Routes>
-          <Main/>
+          {/* <Main/> */}
         </RainbowKitProvider>
       </WagmiConfig>
     </>

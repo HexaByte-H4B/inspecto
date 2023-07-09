@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-function ChatPage() {
+export default function ChatPage() {
+  const { chatID } = useParams();
+
+  useEffect(() => {
+    console.log(chatID);
+  })
+
   return (
     <>
-        <h1>Chat Page</h1>
+      
     </>
-  )
+  );
 }
-
-export default ChatPage
