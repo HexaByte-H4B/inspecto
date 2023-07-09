@@ -16,6 +16,7 @@ import Main from './pages/Main';
 import Navbar from "./components/Navbar"
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Card from "./components/Card/Card"
 
 const { chains, publicClient } = configureChains(
   [polygonMumbai, polygon],
@@ -43,6 +44,7 @@ export default function App() {
       <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider coolMode chains={chains}>
           <Navbar />
+          <Card/>
           <Routes>
             <Route path='/sign-in' element={<SignIn />} />
             <Route path='/sign-up' element={<SignUp />} />
