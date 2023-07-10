@@ -22,7 +22,7 @@ const Anime = () => {
                 <div class="shadow"></div>
             </Box>
 
-            <Box position="absolute" top="0" width="100%"  height="100%" background="rgba(0,0,0,0.4)"
+            <Box position="absolute" top="0" width="100%"  height="100%" background="rgba(0,0,0,0.5)"
                 display="flex" justifyContent="center"
             >
 
