@@ -17,7 +17,7 @@ export default function ChatPage() {
         <Chatlist chatID={chatID}/>
       </div>
       <div className="w-full bg-gray-200">
-        <Chatscreen/>
+        <Chatscreen chatID={chatID}/>
       </div>
     </div>
   );

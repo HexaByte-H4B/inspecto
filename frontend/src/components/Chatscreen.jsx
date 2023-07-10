@@ -1,10 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import moment from "moment";
 import { Dialog } from "@headlessui/react";
 import Draggable from "react-draggable";
 import { FaPhoneSlash, FaPhone, FaVideo, FaCompress, FaExpand } from "react-icons/fa";
+import io from 'socket.io-client';
 
-export default function ChatScreen() {
+const socket = io('http://socket.inspecto-h4b.xyz');
+
+export default function ChatScreen({chatID}) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +16,7 @@ export default function ChatScreen() {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
   const [timer, setTimer] = useState(null);
+  const [allChats, setAllChats] = useState([])
   const dialogRef = useRef(null);
   const recipient = { name: "Shivrajjj", profileImage: "/images/profileBig.svg" };
 
@@ -65,6 +69,23 @@ export default function ChatScreen() {
   const minutes = Math.floor(callDuration / 60).toString().padStart(2, "0");
   const seconds = (callDuration % 60).toFixed(0).toString().padStart(2, "0");
 
+  const sendMessage = () => {
+    console.log("Sending message: ", message);
+    socket.emit('send_message', {message, chatID});
+  }
+
+  useEffect(() => {
+    if (chatID)
+      socket.emit('join_room', chatID);
+  }, [chatID])
+
+  useEffect(() => {
+    socket.on('receive_message', (data) => {
+      // setMsgReceived(data)
+      console.log("Received message: ", data);
+    })
+  }, [socket])
+
   return (
     <div className="z flex flex-col h-[calc(100vh-60px)] bg-no-repeat bg-center bg-cover" style={{ backgroundImage: "url(images/chatbg.svg)" }}>
       {/* Header section */}
@@ -99,7 +120,7 @@ export default function ChatScreen() {
       <div className="flex items-center bg-gray-100 p-3 rounded-lg shadow-md" style={{ zIndex: 1 }}>
         <img src="/images/attachment.svg" width={30} height={30} alt="attachments" className="mr-3" />
         <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { handleSendMessage(); } }} className="flex-1 px-4 py-2 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#436475]" placeholder="Message" />
-        <img onClick={handleSendMessage} src="/images/send.svg" width={30} height={30} alt="send" className="ml-3 cursor-pointer" />
+        <img onClick={sendMessage} src="/images/send.svg" width={30} height={30} alt="send" className="ml-3 cursor-pointer" />
       </div>
       {/* Call Modal */}
       <>
