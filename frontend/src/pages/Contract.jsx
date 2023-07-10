@@ -44,6 +44,18 @@ const Contract = () => {
     });
   };
 
+  const markCompleted = useContractWrite({ 
+    address: CONTRACT_ADDRESS, 
+    abi: ensRegistry, 
+    functionName: 'markCompleted', 
+  }); 
+ 
+  const handleMarkCompleted = async () => { 
+    await markCompleted.write({ 
+      args: ['0'] 
+    }); 
+  };
+
   const apolloRunner = useQueryRunner()
   const fetcher = async () => {
     // console.log('check param', params.contractId)
@@ -74,6 +86,7 @@ const Contract = () => {
         awardedAuditor={awardedAuditor}
         handleAssignAuditor={handleAssignAuditor} 
         handleApplyAuditor={handleApplyAuditor}
+        handleMarkCompleted={handleMarkCompleted}
         viewFor={localStorage.getItem('role')}
       />
     </div>

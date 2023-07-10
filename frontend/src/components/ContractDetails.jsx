@@ -30,10 +30,16 @@ function ContractDetails({
   awardedAuditor,
   handleAssignAuditor,
   handleApplyAuditor,
+  handleMarkCompleted,
   viewFor
 }) {
   const [selectedAuditor, setSelectedAuditor] = useState({})
   const {address, isConnected, isDisconnected} = useAccount()
+
+  let assignedAddress = awardedAuditor.auditor
+  let curAddress = address
+  console.log(assignedAddress, curAddress, assignedAddress?.toLowerCase() === curAddress?.toLowerCase())
+  console.log(awardedAuditor)
 
   const TruncatedText = ({ text }) => {
     
@@ -119,8 +125,8 @@ return (
                 <TruncatedText text={awardedAuditor.auditor}/>
               </Text>
             </Box>
-            {awardedAuditor.auditor === address && (
-              <Button size="sm" onClick={() => handleApplyAuditor(escrowId)}>Mark as completed!</Button>
+            {address && awardedAuditor.auditor == address && (
+              <Button size="sm" onClick={() => handleMarkCompleted(escrowId)}>Mark as completed!</Button>
             )}
           </>
         ) : viewFor === "company" ? 
@@ -146,6 +152,16 @@ return (
               <Button onClick={() => handleApplyAuditor(escrowId)}>Apply Now!</Button>
             </Flex>
           )}
+        <Box>
+          {/* <Input 
+            // value={}
+            // onChange={}
+            placeholder="Enter your description or links.."
+            w="100%"
+            h="100px"
+
+          /> */}
+        </Box>
       </Box>
     </Box>
   </Container>
