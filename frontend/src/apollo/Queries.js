@@ -38,3 +38,28 @@ export const GetApplicantsQuery = `
     }
   }
 `
+
+export const GetAssignedAuditorQuery = `
+  query($id: Int!) {
+    auditorAssigneds(where: {escrowId: $id}) {
+      id
+      auditor
+      escrowId
+    }
+  }
+`
+
+export const GetLatestStatusByEscrowIdQuery = `
+  query($id: Int!) {
+    escrowStatusUpdateds(
+      orderBy: blockTimestamp
+      orderDirection: desc
+      where: {escrowId: $id}
+      first: 1
+    ) {
+      id
+      status
+      escrowId
+    }
+  }
+`
