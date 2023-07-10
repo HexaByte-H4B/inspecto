@@ -2,10 +2,16 @@ import React from 'react';
 import ensRegistry from '../abi/ensRegistry.json';
 import nftMintAbi from '../abi/nftMintAbi.json';
 import { useContractWrite } from 'wagmi';
+import { DiscussionEmbed } from 'disqus-react'
 
 const CONTRACT_ADDRESS = "0x5a8391233E8821621986614ce1C2bcaA1dd5BF3C";
 const NFT_CONTRACT_ADDRESS = "0xCb09B990E61e4Ff20D59de5f1039EB28872578B9";
 
+const disqusConfig = {
+  url: window.location.href,
+  identifier: ,
+  title: "Comments",
+}
 function Main() {
   /* Apply as auditor
   const { data, isLoading, isSuccess, write } = useContractWrite({
@@ -95,6 +101,7 @@ function Main() {
   );
   */
 
+  /*
   const { data, isLoading, isSuccess, write } = useContractWrite({
     address: NFT_CONTRACT_ADDRESS,
     abi: nftMintAbi,
@@ -114,7 +121,14 @@ function Main() {
       {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
     </>
   );
-
+  */  
+  <DiscussionEmbed
+    // __css={{}}
+    shortname='chainpact'
+    config={
+      disqusConfig
+    }
+  />
 }
 
 export default Main;
