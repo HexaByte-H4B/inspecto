@@ -15,8 +15,7 @@ import { publicProvider } from 'wagmi/providers/public';
 import Navbar from "./components/Navbar"
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-
-import Portfolio from './components/portfolio/Portfolio';
+import Anime from './components/Anime/Amime';
 
 
 const { chains, publicClient } = configureChains(
@@ -45,8 +44,7 @@ export default function App() {
       <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider coolMode chains={chains}>
         <Navbar />
-        <Portfolio/>
-         
+         <Anime/>
 
           <Routes>
             <Route path='/sign-in' element={<SignIn />} />
