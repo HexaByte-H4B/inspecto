@@ -69,7 +69,7 @@ function ContractDetails({
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalHeader>Do you want to assign this auditor for your task?</ModalHeader>
             <ModalCloseButton />
             
             <ModalFooter>
@@ -82,7 +82,7 @@ function ContractDetails({
                   console.log(err)
                 }
               }}>
-                Accept
+                Yes
               </Button>
               <Button colorScheme='blue'>Cancel</Button>
             </ModalFooter>
@@ -168,6 +168,7 @@ return (
           </Button>
         )}
       </Box>
+      {/* <Disqus config={disqusConfig} /> */}
     </Box>
   </Container>
 )
