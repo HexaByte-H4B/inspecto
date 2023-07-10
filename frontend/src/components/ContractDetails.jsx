@@ -115,18 +115,18 @@ return (
       </Box>
 
 
-      <Box p="2rem" background="#2D3748" mt="2rem" borderRadius="5px" w="400px" minW={300}>
+      <Box p="2rem" background="#2D3748" mt="2rem" borderRadius="5px" w="400px" minW={300} pos="relative">
         {awardedAuditor ? (
           <>
             <Text fontSize={20} textAlign="center" marginBottom={"20px"}>Assigned Auditor</Text>
-            <Box display="flex" alignItems="center" mb="1rem">
+            <Box display="flex" alignItems="center" mb="1rem" pos="res">
               <Avatar mr="1rem" size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
               <Text >
                 <TruncatedText text={awardedAuditor.auditor}/>
               </Text>
             </Box>
-            {address && awardedAuditor.auditor == address && (
-              <Button size="sm" onClick={() => handleMarkCompleted(escrowId)}>Mark as completed!</Button>
+            {address && awardedAuditor.auditor?.toLowerCase() == address?.toLowerCase() && (
+              <Button size="sm" onClick={() => handleMarkCompleted(escrowId)} pos="absolute" left="50%" transform="translateX(-50%)">Mark as completed!</Button>
             )}
           </>
         ) : viewFor === "company" ? 
