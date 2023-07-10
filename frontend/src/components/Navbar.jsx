@@ -22,6 +22,7 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 import {Link as ReactLink} from "react-router-dom"
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
@@ -64,23 +65,13 @@ export default function WithSubnavigation() {
           </Flex>
         </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
+        <Flex
+          //flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'blue.400'}
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Logout
-          </Button>
-        </Stack>
+          <ConnectButton/>
+        </Flex>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
