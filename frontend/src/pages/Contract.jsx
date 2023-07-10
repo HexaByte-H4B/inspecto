@@ -15,25 +15,32 @@ const Contract = () => {
   const [appliedAuditors, setAppliledAuditors] = useState([])
 
   /* Assign a auditor */
-  const { data, isLoading, isSuccess, write } = useContractWrite({
+  const assignAuditor = useContractWrite({
+  // const { assignAuditorData, assignAuditorIsLoading, assignAuditorIsSuccess, write } = useContractWrite({
     address: CONTRACT_ADDRESS,
     abi: ensRegistry,
     functionName: 'assignAuditor',
   });
 
   const handleAssignAuditor = async (escrowId, applicationId) => {
-    await write({
+    await assignAuditor.write({
       args: [escrowId, applicationId]
     });
   };
 
-  // return (
-  //   <>
-  //     <button onClick={handleAssignAuditor}>Assign</button>
-  //     {isLoading && <div>Check Wallet</div>}
-  //     {isSuccess && <div>Transaction: {JSON.stringify(data)}</div>}
-  //   </>
-  // );
+  // Apply as auditor
+  const applyAsAuditor = useContractWrite({
+  // const { applyAsAuditorData, applyAsAuditorIsLoading, applyAsAuditorIsSuccess, write } = useContractWrite({
+    address: CONTRACT_ADDRESS,
+    abi: ensRegistry,
+    functionName: 'applyAsAuditor',
+  });
+
+  const handleApplyAuditor = async (escrowId) => {
+    await applyAsAuditor.write({
+      args: [escrowId]
+    });
+  };
 
   const apolloRunner = useQueryRunner()
   const fetcher = async () => {
@@ -61,6 +68,8 @@ const Contract = () => {
         {...escrowDetails} 
         appliedAuditors={appliedAuditors} 
         handleAssignAuditor={handleAssignAuditor} 
+        handleApplyAuditor={handleApplyAuditor}
+        viewFor={localStorage.getItem('role')}
       />
     </div>
   )
