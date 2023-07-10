@@ -28,17 +28,17 @@ const Anime = () => {
                         Revolutionize the Way You Do <span>Business</span> with Our Smart Contract Platform
                     </Heading>
 
-                    <Text color='#ffffff' mt="2rem" p="0 1rem" fontSize="18px" letterSpacing="1px" mb="4rem">
+                    <Text color='#ffffff' mt="2rem" p="0 3rem" fontSize="18px" letterSpacing="1px" mb="4rem">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti praesentium  rerum maiores inventore eligendi magni et at incidunt dolore.
                     </Text>
 
                     <Box>
                     <Link to="/sign-up">""
-                    <Button mr="1rem" background="#d3cf13"> SignUp  </Button>
+                    <Button mr="1rem" background="#d3cf13" variant="none"> SignUp  </Button>
                     </Link>
                     
                     <Link to="/sign-up">
-                    <Button  to="/sign-in" background="#d3cf13">SignIn </Button> 
+                    <Button  to="/sign-in" background="#d3cf13" variant="none">SignIn </Button> 
                     </Link>
                    
                     </Box>
