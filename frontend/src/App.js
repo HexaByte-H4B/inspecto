@@ -18,6 +18,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ContractUpload from './pages/ContractUpload';
 import ChatPage from './pages/ChatPage';
+import Mint from './pages/Mint';
 
 const { chains, publicClient } = configureChains(
   [polygonMumbai, polygon],
@@ -50,6 +51,7 @@ export default function App() {
             <Route path='/sign-up' element={<SignUp />} />
             <Route path='/contract-upload' element={<ContractUpload />} />
             <Route path='/connection/chat/:chatID' element={<ChatPage />}/>
+            <Route path='/mint' element={<Mint/>} />
           </Routes>
           {/* <Main/> */}
         </RainbowKitProvider>
