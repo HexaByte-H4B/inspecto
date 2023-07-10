@@ -8,6 +8,7 @@ body {
   font-family : 'Syne', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 code {
@@ -15,14 +16,9 @@ code {
     monospace;
 }
 
-button{
-  font-family : 'Syne', sans-serif;
-}
+
 
 h1,h2{
   font-family: 'Syne', sans-serif !important;
 }
 
-p{
-  font-family: 'Montserrat', sans-serif !important;
-}

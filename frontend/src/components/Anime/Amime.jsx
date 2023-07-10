@@ -15,14 +15,10 @@ const Anime = () => {
     return (
 
         <Box position="relative" h="calc(100vh - 3rem)">
-            <Box className="anime-container " >
+          
 
-                <div class="ball">
-                </div>
-                <div class="shadow"></div>
-            </Box>
 
-            <Box position="absolute" top="0" width="100%"  height="100%" background="rgba(0,0,0,0.6)"
+            <Box position="absolute" top="0" width="100%" background="#2D3748"  height="100%" background="rgba(0,0,0,0.6)"
                 display="flex" justifyContent="center"
             >
 
@@ -32,17 +28,17 @@ const Anime = () => {
                         Revolutionize the Way You Do <span>Business</span> with Our Smart Contract Platform
                     </Heading>
 
-                    <Text color='#ffffff' mt="2rem" p="0 1rem" fontSize="20px" letterSpacing="1px" mb="4rem">
+                    <Text color='#ffffff' mt="2rem" p="0 1rem" fontSize="18px" letterSpacing="1px" mb="4rem">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti praesentium  rerum maiores inventore eligendi magni et at incidunt dolore.
                     </Text>
 
                     <Box>
-                    <Link to="/sign-up">
-                    <Button mr="1rem" > SignUp  </Button>
+                    <Link to="/sign-up">""
+                    <Button mr="1rem" background="#d3cf13"> SignUp  </Button>
                     </Link>
                     
                     <Link to="/sign-up">
-                    <Button  to="/sign-in">SignIn </Button> 
+                    <Button  to="/sign-in" background="#d3cf13">SignIn </Button> 
                     </Link>
                    
                     </Box>
