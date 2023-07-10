@@ -66,17 +66,17 @@ export default function ChatScreen() {
   const seconds = (callDuration % 60).toFixed(0).toString().padStart(2, "0");
 
   return (
-    <div className="z flex flex-col h-screen bg-no-repeat bg-center bg-cover" style={{ backgroundImage: "url(images/chatbg.svg)" }}>
+    <div className="z flex flex-col h-[calc(100vh-60px)] bg-no-repeat bg-center bg-cover" style={{ backgroundImage: "url(images/chatbg.svg)" }}>
       {/* Header section */}
       <div className="flex items-center p-4 bg-white shadow-lg">
         <img src={recipient.profileImage} alt={recipient.name} className="w-12 h-12 rounded-full mr-4" />
         <div className="flex-1">
           <p className="text-lg font-semibold text-[#436475]">{recipient.name}</p>
         </div>
-        <div className="flex flex-row cursor-pointer" style={{ zIndex: 1 }}>
+        {/* <div className="flex flex-row cursor-pointer" style={{ zIndex: 1 }}>
           <img onClick={openModal} className="mr-7" src={"/images/call.svg"} width={20} height={20} alt="call" />
           <img onClick={openModal} src={"/images/video.svg"} width={20} height={20} alt="video" />
-        </div>
+        </div> */}
       </div>
       {/* Date section */}
       <div className="flex items-center justify-center mt-4">
