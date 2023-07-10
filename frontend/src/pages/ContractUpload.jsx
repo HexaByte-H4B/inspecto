@@ -15,7 +15,7 @@ import ensRegistry from '../abi/ensRegistry.json';
 import { useContractWrite } from 'wagmi';
 import { useNavigate } from 'react-router';
 
-const CONTRACT_ADDRESS = "0x556b93326e3353715f5d0941386effd3d232b598";
+const CONTRACT_ADDRESS = "0x7b42206074F3e04637988b9aeFF2fe19957dE6cA";
 
 // Function to convert decimal to wei
 const convertToWei = (value) => {

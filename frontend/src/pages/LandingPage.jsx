@@ -8,7 +8,6 @@ import {
   Link
 } from "@chakra-ui/react";
 
-import './anime.css'
 
 const Anime = () => {
 

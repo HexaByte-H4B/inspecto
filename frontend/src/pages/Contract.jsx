@@ -6,7 +6,7 @@ import ContractDetails from '../components/ContractDetails'
 import { useContractWrite } from 'wagmi'
 import ensRegistry from '../abi/ensRegistry.json'
 
-const CONTRACT_ADDRESS = "0x556b93326e3353715f5d0941386effd3d232b598"; 
+const CONTRACT_ADDRESS = "0x7b42206074F3e04637988b9aeFF2fe19957dE6cA"; 
 const NFT_CONTRACT_ADDRESS = "0xCb09B990E61e4Ff20D59de5f1039EB28872578B9";
 
 const Contract = () => {
