@@ -4,7 +4,7 @@
 .anime-container {
     background-image: linear-gradient(
       to bottom right,
-      rgb(61, 47, 80) ,
+      rgb(64, 52, 82) ,
       rgb(41, 45, 49),
       #6d6791,
       #3f2647,
@@ -15,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
   }
   
@@ -110,3 +110,7 @@
     }
   }
   
+
+  h1 span{
+    color:#d3cf13 !important
+  }
