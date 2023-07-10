@@ -5,7 +5,7 @@ import Draggable from "react-draggable";
 import { FaPhoneSlash, FaPhone, FaVideo, FaCompress, FaExpand } from "react-icons/fa";
 import io from 'socket.io-client';
 
-const socket = io('http://socket.inspecto-h4b.xyz');
+const socket = io('https://socket.inspecto-h4b.xyz');
 
 export default function ChatScreen({chatID}) {
   const [message, setMessage] = useState("");
@@ -119,7 +119,7 @@ export default function ChatScreen({chatID}) {
       {/* Message section */}
       <div className="flex items-center bg-gray-100 p-3 rounded-lg shadow-md" style={{ zIndex: 1 }}>
         <img src="/images/attachment.svg" width={30} height={30} alt="attachments" className="mr-3" />
-        <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { handleSendMessage(); } }} className="flex-1 px-4 py-2 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#436475]" placeholder="Message" />
+        <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { sendMessage(); } }} className="flex-1 px-4 py-2 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#436475]" placeholder="Message" />
         <img onClick={sendMessage} src="/images/send.svg" width={30} height={30} alt="send" className="ml-3 cursor-pointer" />
       </div>
       {/* Call Modal */}
