@@ -17,6 +17,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useAccount } from "wagmi";
 
 
 function ContractDetails({
@@ -26,12 +27,14 @@ function ContractDetails({
   escrowId,
   company,
   appliedAuditors,
+  awardedAuditor,
   handleAssignAuditor,
   handleApplyAuditor,
   viewFor
 }) {
   const [selectedAuditor, setSelectedAuditor] = useState({})
-  console.log({escrowId})
+  const {address, isConnected, isDisconnected} = useAccount()
+
   const TruncatedText = ({ text }) => {
     
     if (!text) return
@@ -107,28 +110,42 @@ return (
 
 
       <Box p="2rem" background="#2D3748" mt="2rem" borderRadius="5px" w="400px" minW={300}>
-        {viewFor === "company" ? (
+        {awardedAuditor ? (
           <>
-            <Text fontSize={20} textAlign="center" marginBottom={"20px"}>Applicants List</Text>
-            {appliedAuditors.length ? appliedAuditors?.map((auditor, index) => (
-              <Box display="flex" alignItems="center" mb="1rem">
-                <Avatar mr="1rem" size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
-                <Text >
-                  <TruncatedText text={auditor.auditor}/>
-                </Text>
-                <Spacer/>
-                <ApprovalModal escrowId={auditor.escrowId} applicationId={auditor.applicationId} />
-              </Box>
-            )) :
-              <Text textAlign="center">No Applicants Found</Text>
-            }
+            <Text fontSize={20} textAlign="center" marginBottom={"20px"}>Assigned Auditor</Text>
+            <Box display="flex" alignItems="center" mb="1rem">
+              <Avatar mr="1rem" size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
+              <Text >
+                <TruncatedText text={awardedAuditor.auditor}/>
+              </Text>
+            </Box>
+            {awardedAuditor.auditor === address && (
+              <Button size="sm" onClick={() => handleApplyAuditor(escrowId)}>Mark as completed!</Button>
+            )}
           </>
-        ) : (
-          <Flex flexDirection="column" alignItems="center">
-            <Text fontSize={20} textAlign="center" marginBottom={"20px"}>Actions</Text>
-            <Button onClick={() => handleApplyAuditor(escrowId)}>Apply Now!</Button>
-          </Flex>
-        )}
+        ) : viewFor === "company" ? 
+          (
+            <>
+              <Text fontSize={20} textAlign="center" marginBottom={"20px"}>Applicants List</Text>
+              {appliedAuditors.length ? appliedAuditors?.map((auditor, index) => (
+                <Box display="flex" alignItems="center" mb="1rem">
+                  <Avatar mr="1rem" size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
+                  <Text >
+                    <TruncatedText text={auditor.auditor}/>
+                  </Text>
+                  <Spacer/>
+                  <ApprovalModal escrowId={auditor.escrowId} applicationId={auditor.applicationId} />
+                </Box>
+              )) :
+                <Text textAlign="center">No Applicants Found</Text>
+              }
+            </>
+          ) : (
+            <Flex flexDirection="column" alignItems="center">
+              <Text fontSize={20} textAlign="center" marginBottom={"20px"}>Actions</Text>
+              <Button onClick={() => handleApplyAuditor(escrowId)}>Apply Now!</Button>
+            </Flex>
+          )}
       </Box>
     </Box>
   </Container>

@@ -38,3 +38,13 @@ export const GetApplicantsQuery = `
     }
   }
 `
+
+export const GetAssignedAuditorQuery = `
+  query($id: Int!) {
+    auditorAssigneds(where: {escrowId: $id}) {
+      id
+      auditor
+      escrowId
+    }
+  }
+`
