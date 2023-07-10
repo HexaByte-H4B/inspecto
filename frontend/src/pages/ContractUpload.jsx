@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Flex,
   Box,
@@ -13,8 +13,9 @@ import {
 } from '@chakra-ui/react';
 import ensRegistry from '../abi/ensRegistry.json';
 import { useContractWrite } from 'wagmi';
+import { useNavigate } from 'react-router';
 
-const CONTRACT_ADDRESS = "0x0CDd1d8AaFa5e9B6ad5e5cC0E5dF25361aDa9E42";
+const CONTRACT_ADDRESS = "0x556b93326e3353715f5d0941386effd3d232b598";
 
 // Function to convert decimal to wei
 const convertToWei = (value) => {
@@ -29,6 +30,13 @@ export default function ContractUpload() {
     abi: ensRegistry,
     functionName: 'createEscrow',
   });
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isSuccess)
+      navigate('/')
+  },[isSuccess])
 
   const handleCreateEscrow = async (event) => {
     event.preventDefault(); // Prevent form submission and page reload

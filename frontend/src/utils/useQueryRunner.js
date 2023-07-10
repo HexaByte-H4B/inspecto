@@ -3,7 +3,7 @@ import { useCallback } from "react"
 
 export function useQueryRunner() {
     return useCallback(async (query, variables) => {
-      let API_URL = "https://api.studio.thegraph.com/query/41653/escrow-subgraph/0.0.2"
+      let API_URL = "https://api.studio.thegraph.com/query/41653/escrow-subgraph/0.0.5"
     
       const client = new ApolloClient({
         uri: API_URL,

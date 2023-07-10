@@ -28,18 +28,22 @@ function ContractDetails({
   company,
   appliedAuditors,
   awardedAuditor,
+  latestStatus,
   handleAssignAuditor,
   handleApplyAuditor,
   handleMarkCompleted,
+  handleVerifyCompletion,
   viewFor
 }) {
   const [selectedAuditor, setSelectedAuditor] = useState({})
   const {address, isConnected, isDisconnected} = useAccount()
 
-  let assignedAddress = awardedAuditor.auditor
-  let curAddress = address
-  console.log(assignedAddress, curAddress, assignedAddress?.toLowerCase() === curAddress?.toLowerCase())
-  console.log(awardedAuditor)
+  // let assignedAddress = awardedAuditor.auditor
+  // let curAddress = address
+  // console.log(assignedAddress, curAddress, assignedAddress?.toLowerCase() === curAddress?.toLowerCase())
+  // console.log(awardedAuditor)
+
+  console.log({latestStatus})
 
   const TruncatedText = ({ text }) => {
     
@@ -122,10 +126,10 @@ return (
             <Box display="flex" alignItems="center" mb="1rem" pos="res">
               <Avatar mr="1rem" size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
               <Text >
-                <TruncatedText text={awardedAuditor.auditor}/>
+                <TruncatedText text={awardedAuditor?.auditor}/>
               </Text>
             </Box>
-            {address && awardedAuditor.auditor?.toLowerCase() == address?.toLowerCase() && (
+            {address && awardedAuditor?.auditor?.toLowerCase() == address?.toLowerCase() && (
               <Button size="sm" onClick={() => handleMarkCompleted(escrowId)} pos="absolute" left="50%" transform="translateX(-50%)">Mark as completed!</Button>
             )}
           </>
@@ -137,7 +141,7 @@ return (
                 <Box display="flex" alignItems="center" mb="1rem">
                   <Avatar mr="1rem" size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
                   <Text >
-                    <TruncatedText text={auditor.auditor}/>
+                    <TruncatedText text={auditor?.auditor}/>
                   </Text>
                   <Spacer/>
                   <ApprovalModal escrowId={auditor.escrowId} applicationId={auditor.applicationId} />
@@ -152,16 +156,17 @@ return (
               <Button onClick={() => handleApplyAuditor(escrowId)}>Apply Now!</Button>
             </Flex>
           )}
-        <Box>
-          {/* <Input 
-            // value={}
-            // onChange={}
-            placeholder="Enter your description or links.."
-            w="100%"
-            h="100px"
-
-          /> */}
-        </Box>
+        {latestStatus !== null && latestStatus === 3 && viewFor === "company" && (
+          <Button 
+            size="sm" 
+            onClick={() => handleVerifyCompletion(escrowId)} 
+            pos="absolute" 
+            left="50%" 
+            transform="translateX(-50%)"
+          >
+            Verify Audit!
+          </Button>
+        )}
       </Box>
     </Box>
   </Container>

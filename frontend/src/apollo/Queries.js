@@ -48,3 +48,18 @@ export const GetAssignedAuditorQuery = `
     }
   }
 `
+
+export const GetLatestStatusByEscrowIdQuery = `
+  query($id: Int!) {
+    escrowStatusUpdateds(
+      orderBy: blockTimestamp
+      orderDirection: desc
+      where: {escrowId: $id}
+      first: 1
+    ) {
+      id
+      status
+      escrowId
+    }
+  }
+`

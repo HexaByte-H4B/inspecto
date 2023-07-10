@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { GetApplicantsQuery, GetAssignedAuditorQuery, GetContractDetailsQuery } from '../apollo/Queries'
+import { GetApplicantsQuery, GetAssignedAuditorQuery, GetContractDetailsQuery, GetLatestStatusByEscrowIdQuery } from '../apollo/Queries'
 import { useQueryRunner } from '../utils/useQueryRunner'
 import ContractDetails from '../components/ContractDetails'
 import { useContractWrite } from 'wagmi'
 import ensRegistry from '../abi/ensRegistry.json'
 
-const CONTRACT_ADDRESS = "0x0CDd1d8AaFa5e9B6ad5e5cC0E5dF25361aDa9E42"; 
+const CONTRACT_ADDRESS = "0x556b93326e3353715f5d0941386effd3d232b598"; 
 const NFT_CONTRACT_ADDRESS = "0xCb09B990E61e4Ff20D59de5f1039EB28872578B9";
 
 const Contract = () => {
@@ -14,6 +14,7 @@ const Contract = () => {
   const [escrowDetails, setEscrowDetails] = useState([])
   const [appliedAuditors, setAppliledAuditors] = useState([])
   const [awardedAuditor, setAwardedAuditor] = useState({})
+  const [latestStatus, setLatestStatus] = useState(null)
 
   /* Assign a auditor */
   const assignAuditor = useContractWrite({
@@ -50,9 +51,21 @@ const Contract = () => {
     functionName: 'markCompleted', 
   }); 
  
-  const handleMarkCompleted = async () => { 
+  const handleMarkCompleted = async (escrowId) => { 
     await markCompleted.write({ 
-      args: ['0'] 
+      args: [escrowId] 
+    }); 
+  };
+
+  const verifyCompletion = useContractWrite({ 
+    address: CONTRACT_ADDRESS, 
+    abi: ensRegistry, 
+    functionName: 'verifyCompletion', 
+  }); 
+ 
+  const handleVerifyCompletion = async (escrowId) => { 
+    await verifyCompletion.write({ 
+      args: [escrowId, true] 
     }); 
   };
 
@@ -60,6 +73,9 @@ const Contract = () => {
   const fetcher = async () => {
     // console.log('check param', params.contractId)
     try {
+      const statusRes = await apolloRunner(GetLatestStatusByEscrowIdQuery, {id: parseInt(params.contractId)})
+      console.log('statusRes', statusRes.data.escrowStatusUpdateds)
+      setLatestStatus(statusRes.data.escrowStatusUpdateds[0].status)
       const contractRes = await apolloRunner(GetContractDetailsQuery, {id: params.contractId})
       setEscrowDetails(contractRes.data.escrowCreateds[0])
       const assignedAuditorsRes = await apolloRunner(GetAssignedAuditorQuery, {id: parseInt(params.contractId)})
@@ -84,9 +100,11 @@ const Contract = () => {
         {...escrowDetails} 
         appliedAuditors={appliedAuditors} 
         awardedAuditor={awardedAuditor}
+        latestStatus={latestStatus}
         handleAssignAuditor={handleAssignAuditor} 
         handleApplyAuditor={handleApplyAuditor}
         handleMarkCompleted={handleMarkCompleted}
+        handleVerifyCompletion={handleVerifyCompletion}
         viewFor={localStorage.getItem('role')}
       />
     </div>
