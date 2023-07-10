@@ -15,7 +15,8 @@ import { publicProvider } from 'wagmi/providers/public';
 import Navbar from "./components/Navbar"
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import SoftLoader from './components/Loader/solidLoader';
+
+import Portfolio from './components/portfolio/Portfolio';
 
 
 const { chains, publicClient } = configureChains(
@@ -43,8 +44,10 @@ export default function App() {
     <>
       <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider coolMode chains={chains}>
-          <Navbar />
-          <SoftLoader/>
+        <Navbar />
+        <Portfolio/>
+         
+
           <Routes>
             <Route path='/sign-in' element={<SignIn />} />
             <Route path='/sign-up' element={<SignUp />} />
