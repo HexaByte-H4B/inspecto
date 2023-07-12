@@ -1,0 +1,87 @@
+type AuditorApplied @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  applicationId: BigInt! # uint256
+  auditor: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AuditorAssigned @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  auditor: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DepositRefunded @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  company: Bytes! # address
+  depositRefund: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DepositTransferred @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  auditor: Bytes! # address
+  depositRefund: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EscrowCancelled @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  canceller: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EscrowCompleted @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EscrowCreated @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  company: Bytes! # address
+  deposit: BigInt! # uint256
+  title: String! # string
+  description: String! # string
+  url: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EscrowFeeDeducted @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  platform: Bytes! # address
+  feeAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EscrowStatusUpdated @entity(immutable: true) {
+  id: Bytes!
+  escrowId: BigInt! # uint256
+  status: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

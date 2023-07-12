@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQueryRunner } from '../utils/useQueryRunner';
 import { GetAllEscrowQuery } from '../apollo/Queries';
 import { useEffect } from 'react';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 const SignIn = () => {
 
@@ -21,6 +22,23 @@ const SignIn = () => {
       .then((userAuth) => {
           console.log(userAuth.user);
           localStorage.setItem('email', userAuth.user.email)
+          const collectionRef = collection(db, "users");
+          const q = query(collectionRef, where("emailId", "==", userAuth.user.email));
+          getDocs(q)
+          .then((querySnapshot) => {
+            if (!querySnapshot.empty) {
+              querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                localStorage.setItem('role', data.role)
+              });
+            } else {
+              console.log("No such document!");
+            }
+          })
+          .catch((error) => {
+            console.log("Error getting documents: ", error);
+          });
+
           navigate("/")
       })
       .catch((err) => {

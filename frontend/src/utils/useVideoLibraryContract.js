@@ -4,7 +4,7 @@ const useVideoLibraryContract = () => {
     try {
         const { data: signer, isError, isLoading } = useSigner()
         const videoLibraryContract = useContract({
-            address: '0x5a8391233E8821621986614ce1C2bcaA1dd5BF3C',
+            address: '0x7b42206074F3e04637988b9aeFF2fe19957dE6cA',
             abi: ensRegistryABI,
             signerOrProvider: signer,
           })
