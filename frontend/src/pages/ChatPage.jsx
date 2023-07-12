@@ -12,12 +12,12 @@ export default function ChatPage() {
 
   return (
     // Main page
-    <div className="flex flex-col md:flex-row w-screen h-screen">
-      <div className="w-full md:w-1/2 bg-gray-100">
-        <Chatlist/>
+    <div className="flex flex-col md:flex-row w-screen h-[calc(100vh-60px)]">
+      <div className="w-[500px] bg-gray-100">
+        <Chatlist chatID={chatID}/>
       </div>
-      <div className="w-full md:w-1/2 bg-gray-200">
-        <Chatscreen/>
+      <div className="w-full bg-gray-200">
+        <Chatscreen chatID={chatID}/>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { useContractWrite } from 'wagmi';
 import { DiscussionEmbed } from 'disqus-react'
 import { Button, Link } from '@chakra-ui/react';
 
-const CONTRACT_ADDRESS = "0x5a8391233E8821621986614ce1C2bcaA1dd5BF3C";
+const CONTRACT_ADDRESS = "0x0CDd1d8AaFa5e9B6ad5e5cC0E5dF25361aDa9E42";
 const NFT_CONTRACT_ADDRESS = "0xCb09B990E61e4Ff20D59de5f1039EB28872578B9";
 
 /*const disqusConfig = {
