@@ -20,6 +20,7 @@ import Contract from './pages/Contract';
 import ContractUpload from './pages/ContractUpload';
 import Anime from './pages/LandingPage';
 import Profile from './pages/Profile';
+import Test from './pages/Test';
 
 const { chains, publicClient } = configureChains(
   [polygonMumbai, polygon],
@@ -55,6 +56,7 @@ export default function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/contract/create' element={<ContractUpload />} />
             <Route path='/contract/:contractId' element={<Contract />} />
+            <Route path='/test' element={<Test />} />
             <Route path="*" element={<Navigate to="/"/>} />
           </Routes>
         </RainbowKitProvider>
