@@ -18,8 +18,6 @@ export default function Test() {
   };
 
   const handleMintNFT = async () => {
-    // Call your function here using the URI value
-    //console.log(`URI: ${uri}`);
     await write({
         args: ['0x257fad1733820E27Cc5132f00d018B019f02c254', uri]
       });
