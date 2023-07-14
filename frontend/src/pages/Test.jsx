@@ -24,12 +24,6 @@ export default function Test() {
       });
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      alert('NFT Minted sucessfully!');
-    }
-  }, [isSuccess]);
-
   return (
     <>
       <Input
