@@ -19,6 +19,7 @@ export default function Test() {
 
   const handleMintNFT = async () => {
     await write({
+        // owner address is statically set for now. It should be fetched from the assigned auditor address
         args: ['0x257fad1733820E27Cc5132f00d018B019f02c254', uri]
       });
   };
