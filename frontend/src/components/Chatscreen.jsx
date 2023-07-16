@@ -5,7 +5,8 @@ import Draggable from "react-draggable";
 import { FaPhoneSlash, FaPhone, FaVideo, FaCompress, FaExpand } from "react-icons/fa";
 import io from 'socket.io-client';
 
-const socket = io('https://socket.inspecto-h4b.xyz');
+// const socket = io('https://socket.inspecto-h4b.xyz');
+const socket = io('http://localhost:8080');
 
 function ChatScreen({chatID}) {
   const [message, setMessage] = useState("");
@@ -83,7 +84,7 @@ function ChatScreen({chatID}) {
   useEffect(() => {
     socket.on('receive_message', (data) => {
       // setMsgReceived(data)
-      setMessages([...messages, {message:data, self: false}])
+      setMessages((prevMessages) => [...prevMessages, {message:data, self: false}])
       console.log("Received message: ", data);
     })
   }, [socket])
