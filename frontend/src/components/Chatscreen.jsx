@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 
 const socket = io('https://socket.inspecto-h4b.xyz');
 
-export default function ChatScreen({chatID}) {
+function ChatScreen({chatID}) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,6 @@ export default function ChatScreen({chatID}) {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
   const [timer, setTimer] = useState(null);
-  const [allChats, setAllChats] = useState([])
   const dialogRef = useRef(null);
   const recipient = { name: "Shivrajjj", profileImage: "/images/profileBig.svg" };
 
@@ -72,6 +71,8 @@ export default function ChatScreen({chatID}) {
   const sendMessage = () => {
     console.log("Sending message: ", message);
     socket.emit('send_message', {message, chatID});
+    setMessages([...messages, {message, chatID, self: true}])
+    setMessage("");
   }
 
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function ChatScreen({chatID}) {
   useEffect(() => {
     socket.on('receive_message', (data) => {
       // setMsgReceived(data)
+      setMessages([...messages, {message:data, self: false}])
       console.log("Received message: ", data);
     })
   }, [socket])
@@ -108,9 +110,9 @@ export default function ChatScreen({chatID}) {
       {/* Chat area */}
       <div className="flex-1 flex flex-col overflow-y-auto" style={{ zIndex: 1 }}>
         {messages.map((msg, idx) => (
-          <div key={idx} className={`flex items-start my-2 ${idx % 2 === 0 ? "ml-5 justify-start" : "justify-end mr-5"}`}>
-            <div className={`max-w-xs px-4 py-2 rounded-lg ${idx % 2 === 0 ? "bg-gradient-to-br from-pink-500 to-purple-600 text-white" : "bg-white text-black"}`}>
-              <p className="text-base">{msg}</p>
+          <div key={idx} className={`flex items-start my-2 ${msg.self ? "ml-5 justify-start" : "justify-end mr-5"}`}>
+            <div className={`max-w-xs px-4 py-2 rounded-lg ${msg.self ? "bg-gradient-to-br from-pink-500 to-purple-600 text-white" : "bg-white text-black"}`}>
+              <p className="text-base">{msg.message}</p>
               <p className="text-xs text-gray-400 text-right mt-1">{moment().format("h:mm A")}</p>
             </div>
           </div>
@@ -167,3 +169,5 @@ export default function ChatScreen({chatID}) {
     </div>
   );
 }
+
+export default React.memo(ChatScreen);
