@@ -45,9 +45,14 @@ export default function Portfolio() {
                 </Box>
               ))}
             </Box>
-            <Box width="100%">
-              <Text fontSize="20px" color="#" size='md' mb="1rem"> Title here</Text>
-              <Button size='sm' background="#F7FAFC" variant="none" color="#222230">Click to see</Button>
+            <Box>
+              {allNfts.map((nft, index) => (
+                <Box key={index} mb={2}>
+                  <Link href={nft.tokenURI} isExternal>
+                    <Button>View NFT Report #{index+1}</Button>
+                  </Link>
+                </Box>
+              ))}
             </Box>
           </Box>
         </Box>
