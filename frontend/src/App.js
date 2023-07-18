@@ -53,7 +53,7 @@ export default function App() {
             <Route exact path='/home' element={<Home />} />
             <Route path='/sign-in' element={<SignIn />} />
             <Route path='/sign-up' element={<SignUp />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/:address' element={<Profile />} />
             <Route path='/contract/create' element={<ContractUpload />} />
             <Route path='/contract/:contractId' element={<Contract />} />
             <Route path='/test' element={<Test />} />
