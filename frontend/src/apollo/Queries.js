@@ -65,13 +65,12 @@ export const GetLatestStatusByEscrowIdQuery = `
 `
 
 export const GetNftReportsQuery = `
-  query {
-    nftminteds(orderBy: blockTimestamp, orderDirection: desc) {
-      id
+  query($recipient: String!) {
+    nftminteds(where: { recipient: $recipient }) {
       recipient
-      tokenId
       tokenURI
-      transactionHash
+      tokenId
+      id
     }
   }
 `
