@@ -3,7 +3,6 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -23,6 +22,7 @@ import {
 } from '@chakra-ui/icons';
 import {Link as ReactLink} from "react-router-dom"
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
@@ -85,6 +85,7 @@ const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200');
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  const { address, isConnected } = useAccount();
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -95,7 +96,11 @@ const DesktopNav = () => {
               <Link
                 as={ReactLink}
                 p={2}
-                to={navItem.href ?? '#'}
+                to={
+                  navItem.href === '/profile' && isConnected
+                    ? `/profile/${address}`
+                    : navItem.href ?? '#'
+                }
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -130,10 +135,15 @@ const DesktopNav = () => {
 };
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
+  const { address, isConnected } = useAccount();
   return (
     <Link
       as={ReactLink}
-      to={href}
+      to={
+        href === '/profile' && isConnected
+          ? `/profile/${address}`
+          : href ?? '#'
+      }
       role={'group'}
       display={'block'}
       p={2}
@@ -178,6 +188,7 @@ const MobileNav = () => {
 };
 
 const MobileNavItem = ({ label, children, href }) => {
+  const { address, isConnected } = useAccount();
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -185,7 +196,11 @@ const MobileNavItem = ({ label, children, href }) => {
       <Flex
         py={2}
         as={Link}
-        href={href ?? '#'}
+        href={
+          href === '/profile' && isConnected
+            ? `/profile/${address}`
+            : href ?? '#'
+        }
         justify={'space-between'}
         align={'center'}
         _hover={{
@@ -217,7 +232,11 @@ const MobileNavItem = ({ label, children, href }) => {
           align={'start'}>
           {children &&
             children.map((child) => (
-              <Link as={ReactLink} key={child.label} py={2} to={child.href}>
+              <Link as={ReactLink} key={child.label} py={2} to={
+                child.href === '/profile' && isConnected
+                  ? `/profile/${address}`
+                  : child.href ?? '#'
+              }>
                 {child.label}
               </Link>
             ))}
@@ -236,10 +255,6 @@ const NAV_ITEMS = [
     label: 'Create',
     href: '/contract/create',
   },
-  /*{
-    label: 'Connections',
-    href: '/connections',
-  },*/
   {
     label: 'Profile',
     href: '/profile',
