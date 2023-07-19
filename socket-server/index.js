@@ -2,6 +2,7 @@ const express = require('express')
 const { Server } = require('socket.io')
 const http = require('http')
 const cors = require('cors')
+require('dotenv').config()
 
 const app = express()
 app.use(cors())
@@ -28,6 +29,6 @@ io.on('connection', (socket) => {
 })
 
 
-server.listen('8080', () => {
+server.listen(process.env.PORT || '8080', () => {
     console.log('Server is running on port 8080')
 })
