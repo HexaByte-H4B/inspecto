@@ -8,6 +8,21 @@ html, body {
   background-color: #282c34;
   min-height: 100vh;
 }
+::-webkit-scrollbar {
+  width: 0.5em; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb on hover */
+}
 
 .anime-container {
   background-image: linear-gradient(
