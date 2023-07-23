@@ -20,6 +20,7 @@ import Contract from './pages/Contract';
 import ContractUpload from './pages/ContractUpload';
 import Anime from './pages/LandingPage';
 import Profile from './pages/Profile';
+import ChatPage from './pages/ChatPage';
 import Test from './pages/Test';
 import PageNotFound from './pages/PageNotFound';
 
@@ -54,6 +55,7 @@ export default function App() {
             <Route exact path='/home' element={<Home />} />
             <Route exact path='/sign-in' element={<SignIn />} />
             <Route exact path='/sign-up' element={<SignUp />} />
+            <Route path='/connection/chat/:chatID' element={<ChatPage />}/>
             <Route exact path='/profile/:address' element={<Profile />} />
             <Route exact path='/contract/create' element={<ContractUpload />} />
             <Route exact path='/contract/:contractId' element={<Contract />} />
