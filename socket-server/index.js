@@ -23,11 +23,11 @@ io.on('connection', (socket) => {
 
     socket.on('send_message', (data) => {
         console.log(data)
-        socket.to(data.roomName).emit('receive_message', data.message)
+        socket.to(data.chatID).emit('receive_message', data.message)
     })
 })
 
 
-server.listen('8080', () => {
-    console.log('Server is running on port 8080')
+server.listen(process.env.PORT || '8080', () => {
+    console.log(`Server is running on port ${process.env.PORT || '8080'}`)
 })
