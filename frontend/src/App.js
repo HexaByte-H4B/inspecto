@@ -19,7 +19,9 @@ import SignUp from './pages/SignUp';
 import Contract from './pages/Contract';
 import ContractUpload from './pages/ContractUpload';
 import Anime from './pages/LandingPage';
-import Portfolio from './pages/Profile';
+import Profile from './pages/Profile';
+import Test from './pages/Test';
+import PageNotFound from './pages/PageNotFound';
 
 const { chains, publicClient } = configureChains(
   [polygonMumbai, polygon],
@@ -48,14 +50,15 @@ export default function App() {
         <RainbowKitProvider coolMode chains={chains}>
           <Navbar />
           <Routes>
-            <Route exact path='/' element={<Home />} />
-            <Route exact path='/landing' element={<Anime />} />
-            <Route path='/sign-in' element={<SignIn />} />
-            <Route path='/sign-up' element={<SignUp />} />
-            <Route path='/contract/create' element={<ContractUpload />} />
-            <Route path='/contract/:contractId' element={<Contract />} />
-            <Route path='/profile/' element={<Portfolio />} />
-            <Route path="*" element={<Navigate to="/"/>} />
+            <Route exact path='/' element={<Anime />} />
+            <Route exact path='/home' element={<Home />} />
+            <Route exact path='/sign-in' element={<SignIn />} />
+            <Route exact path='/sign-up' element={<SignUp />} />
+            <Route exact path='/profile/:address' element={<Profile />} />
+            <Route exact path='/contract/create' element={<ContractUpload />} />
+            <Route exact path='/contract/:contractId' element={<Contract />} />
+            <Route exact path='/test' element={<Test />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </RainbowKitProvider>
       </WagmiConfig>

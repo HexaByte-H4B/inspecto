@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { DiscussionEmbed } from 'disqus-react';
 import { useParams } from 'react-router-dom'
 import { GetApplicantsQuery, GetAssignedAuditorQuery, GetContractDetailsQuery, GetLatestStatusByEscrowIdQuery } from '../apollo/Queries'
 import { useQueryRunner } from '../utils/useQueryRunner'
@@ -9,12 +10,17 @@ import ensRegistry from '../abi/ensRegistry.json'
 const CONTRACT_ADDRESS = "0x7b42206074F3e04637988b9aeFF2fe19957dE6cA"; 
 const NFT_CONTRACT_ADDRESS = "0xCb09B990E61e4Ff20D59de5f1039EB28872578B9";
 
-const Contract = () => {
+export default function Contract() {
   const params = useParams()
   const [escrowDetails, setEscrowDetails] = useState([])
   const [appliedAuditors, setAppliledAuditors] = useState([])
   const [awardedAuditor, setAwardedAuditor] = useState({})
   const [latestStatus, setLatestStatus] = useState(null)
+
+  const disqusConfig = {
+    shortname: 'your_disqus_shortname',
+    config: { identifier: params.contractId, title: 'Contract Page' }
+  };
 
   /* Assign a auditor */
   const assignAuditor = useContractWrite({
@@ -107,8 +113,7 @@ const Contract = () => {
         handleVerifyCompletion={handleVerifyCompletion}
         viewFor={localStorage.getItem('role')}
       />
+      <DiscussionEmbed {...disqusConfig} />
     </div>
   )
-}
-
-export default Contract
+};

@@ -63,3 +63,14 @@ export const GetLatestStatusByEscrowIdQuery = `
     }
   }
 `
+
+export const GetNftReportsQuery = `
+  query($recipient: String!) {
+    nftminteds(where: { recipient: $recipient }) {
+      recipient
+      tokenURI
+      tokenId
+      id
+    }
+  }
+`
